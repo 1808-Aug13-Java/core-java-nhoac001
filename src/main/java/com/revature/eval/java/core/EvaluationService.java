@@ -337,7 +337,7 @@ public class EvaluationService {
 		}
 		
 		return map;
-	}
+	}	
 
 	/**
 	 * 7. Implement a binary search algorithm.
@@ -378,8 +378,17 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+			int size = sortedList.size();
+			int it = size/2;
+			System.out.println(it);
+			
+			T val = sortedList.get(it);
+			while (val != t) {
+				if (t < val){
+					it = it/2;
+				}
+			}
+			return it;
 		}
 
 		public BinarySearch(List<T> sortedList) {
