@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -286,7 +287,6 @@ public class EvaluationService {
 		// Check if size of phoneNumber is >11 (too many numbers)
 		// throw exception if >11
 		if (phoneNumber.length() > 11) {
-			System.out.println("size >11");
 			throw new IllegalArgumentException();
 		}
 		
@@ -297,7 +297,6 @@ public class EvaluationService {
 				phoneNumber = phoneNumber.substring(1);
 			}
 			else {
-				System.out.println(phoneNumber.charAt(0));
 				throw new IllegalArgumentException();
 			}
 		}
@@ -315,8 +314,29 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		// Empty string
+		if (string.isEmpty()) {
+			return null;
+		}
+		
+		// String[] to store parsed string
+		// parse on whitespace and punctuation
+		String[] stringArr = string.split("[\\p{Punct}\\s]");
+		
+		// Map for storage
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		for (String i : stringArr) {
+			// Check if string is not empty
+			if (!i.isEmpty()) {
+				// Put key if absent (unmapped), otherwise increment value
+				if(map.putIfAbsent(i, 1) != null) {
+					map.replace(i, map.get(i) + 1);
+				}
+			}
+		}
+		
+		return map;
 	}
 
 	/**
