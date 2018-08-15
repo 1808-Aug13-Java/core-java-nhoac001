@@ -121,18 +121,26 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
+			// if sideOne = sideTwo and sideTwo = sideThree, then sideOne = sideThree
+			if ((sideOne == sideTwo) && (sideTwo == sideThree)) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
+			// if any two sides are equal, then triangle is isosceles
+			// doesn't have to be exactly 2 sides
+			if ((sideOne == sideTwo) || (sideOne == sideThree) || (sideTwo == sideThree)) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			// since isIsosceles checks if any sides are equal,
+			// its logical not will check if the triangle is scalene
+			return !isIsosceles();
 		}
 
 	}
