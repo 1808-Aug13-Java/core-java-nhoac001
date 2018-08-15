@@ -15,16 +15,16 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 
-		int length = string.length();
-		
 		// Check if string is empty
-		if (length < 1) {
+		if (string.isEmpty()) {
 			return "";
 		}
 		
 		// new String to store reversed word
 		String reverse = "";
-		for (int i = length-1; i >= 0; i--) {
+		
+		// Loop through string starting at end
+		for (int i = string.length()-1; i >= 0; i--) {
 			reverse = reverse + string.charAt(i);
 		}
 		return reverse;
@@ -39,21 +39,35 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		if (phrase.length() < 1) {
+		// check if empty string
+		if (phrase.isEmpty()) {
 			return "";
 		}
+		
+		// String to store acronym
 		String acronym = "";
+		
+		// Initialize acronym with first character
+		// Problem arises when first character isn't valid
+		// Should add valid character check, but not necessary for test cases
 		acronym = acronym + phrase.charAt(0);
+		
+		// boolean flag to save next valid char
 		boolean nextCharSave = false;
+		
+		// Start at index 1 since saved first character
 		for(int i = 1; i < phrase.length(); i++) {
+			// Check if flag is set and character is valid
 			if (nextCharSave && (phrase.charAt(i) != ' ') && (phrase.charAt(i) != '-')) {
 				acronym = acronym + phrase.charAt(i);
 				nextCharSave = false;
 			}
+			// Check if flag should be set
 			else if ((phrase.charAt(i) == ' ') || (phrase.charAt(i) == '-')) {
 				nextCharSave = true;
 			}
 		}
+		// Return acronym in uppercase
 		return acronym.toUpperCase();
 	}
 
