@@ -247,7 +247,16 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
+		// Check if string is empty
+		if (string.isEmpty()) {
+			return null;
+		}
+//		throw new IllegalArgumentException();
+		
+		// First we parse through string to extract only numerical values
+		for (int i = 0; i < string.length(); i++) {
+			
+		}
 		return null;
 	}
 
