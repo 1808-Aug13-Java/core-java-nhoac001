@@ -251,13 +251,58 @@ public class EvaluationService {
 		if (string.isEmpty()) {
 			return null;
 		}
-//		throw new IllegalArgumentException();
 		
+		String phoneNumber = "";
 		// First we parse through string to extract only numerical values
 		for (int i = 0; i < string.length(); i++) {
-			
+			// Switch statement to process characters
+			switch (string.charAt(i)) {
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+				case '0':
+					// Add if number
+					phoneNumber += string.charAt(i);
+					break;
+				case '(':
+				case ')':
+				case ' ':
+				case '-':
+				case '.':
+					// Ignore if valid but not number
+					break;
+				default:
+					// Throw exception for foreign character (alpha, invalid punctuation, etc)
+					throw new IllegalArgumentException();
+			}
 		}
-		return null;
+		
+		// Check if size of phoneNumber is >11 (too many numbers)
+		// throw exception if >11
+		if (phoneNumber.length() > 11) {
+			System.out.println("size >11");
+			throw new IllegalArgumentException();
+		}
+		
+		// Check if country code present
+		if (phoneNumber.length() == 11) {
+			// Check if country code is 1, otherwise throw exception
+			if (phoneNumber.charAt(0) == '1') {
+				phoneNumber = phoneNumber.substring(1);
+			}
+			else {
+				System.out.println(phoneNumber.charAt(0));
+				throw new IllegalArgumentException();
+			}
+		}
+		
+		return phoneNumber;
 	}
 
 	/**
