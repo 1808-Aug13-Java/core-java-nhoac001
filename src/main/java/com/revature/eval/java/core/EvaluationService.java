@@ -161,8 +161,58 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		// Empty string check
+		if (string.isEmpty()) {
+			return 0;
+		}
+		
+		// Store upper-case word
+		String localCopy = string.toUpperCase();
+		
+		int score = 0;
+		
+		// Iterate through string
+		for (int i = 0; i < string.length(); i++) {
+			// Switch statement using fall through to group letter values
+			switch (localCopy.charAt(i)) {
+				case 'A':
+				case 'E':
+				case 'I':
+				case 'O':
+				case 'U':
+				case 'L':
+				case 'N':
+				case 'R':
+				case 'S':
+				case 'T': score += 1;
+					break;
+				case 'D':
+				case 'G': score += 2;
+					break;
+				case 'B':
+				case 'C':
+				case 'M': 
+				case 'P': score += 3;
+					break;
+				case 'F':
+				case 'H':
+				case 'V':
+				case 'W': 
+				case 'Y': score += 4;
+					break;
+				case 'K': score += 5;
+					break;
+				case 'J':
+				case 'X': score += 8;
+					break;
+				case 'Q':
+				case 'Z': score += 10;
+					break;
+				default:
+					break;
+			}
+		}
+		return score;
 	}
 
 	/**
