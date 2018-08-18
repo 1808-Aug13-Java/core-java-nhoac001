@@ -513,7 +513,36 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
+		// input <= 0 should be false
+		if (input <= 0) {
+			return false;
+		}
+		
+		// Local copy of input & sum
+		int in = input;
+		int sum = 0;
+		int placeValue;
+		int numDigits = String.valueOf(input).length();
+		
+		// Single digit input is always true
+		if (numDigits == 1) {
+			return true;
+		}
+		
+		// Parse through in using %
+		for ( int i = 0; i < numDigits; i++) {
+			// Result of % 10 is one's place value
+			placeValue = in % 10;
+			
+			// Add sum by value to the power of numDigits
+			sum += Math.pow(placeValue, numDigits);
+			
+			// Subtract extracted value and reduce by factor of 10
+			in = (in - placeValue)/10;
+		}
+		if (sum == input) {
+			return true;
+		}
 		return false;
 	}
 
