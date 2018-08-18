@@ -454,8 +454,74 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
+		// Empty string case
+		if (string.isEmpty()) {
+			return "";
+		}
 		
-		return null;
+		// Parse string on whitespace delimiter
+		String[] parsedString = string.split("[\\s]+");
+		
+		//Variables for storage
+		String pigString = "";
+		int indexFirstVowel = 0;
+		String vowels = "aeiouAEIOU";
+		String prefix;
+		String suffix;
+
+		// Iterate through parsedString
+		for (String i : parsedString) {
+			// Find index to cut off, second logic statement for vowel-only words
+			while(!vowels.contains(Character.toString(i.charAt(indexFirstVowel))) && (indexFirstVowel < i.length())) {
+				// special case "qu"
+				if ( (i.charAt(indexFirstVowel)) == 'q' && (i.charAt(indexFirstVowel+1) == 'u')) {
+					indexFirstVowel++;
+				}
+				indexFirstVowel++;
+			}
+			// Substring based off of index
+			prefix = i.substring(0, indexFirstVowel);
+			System.out.println(prefix);
+			suffix = i.substring(indexFirstVowel);
+			System.out.println(suffix);
+			
+			// Pig string construction
+			if (pigString.isEmpty()) {
+				pigString += suffix + prefix + "ay";
+			}
+			else {
+				pigString += " " + suffix + prefix + "ay";
+			}
+			// reset index for next word
+			indexFirstVowel = 0;
+		}
+		
+//		for (String i : parsedString) {
+//			System.out.println(i);
+//			// Fall through cases for vowels. Handle consonants in default 
+//			switch (i.charAt(0)) {
+//				case 'a':
+//				case 'e':
+//				case 'i':
+//				case 'o':
+//				case 'u':
+//					if (pigString.isEmpty()) {
+//						pigString = i + "ay";
+//						break;
+//					}
+//					pigString += " " + i + "ay";
+//					break;
+//				default:
+//					if (pigString.isEmpty()) {
+//						pigString = i.substring(1) + i.charAt(0) + "ay";
+//						break;
+//					}
+//					pigString = " " + i.substring(1) + i.charAt(0) + "ay";
+//					break;
+//			}
+//		}
+		System.out.println(pigString);
+		return pigString;
 	}
 
 	/**
