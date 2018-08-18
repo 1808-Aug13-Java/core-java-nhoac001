@@ -481,9 +481,7 @@ public class EvaluationService {
 			}
 			// Substring based off of index
 			prefix = i.substring(0, indexFirstVowel);
-			System.out.println(prefix);
 			suffix = i.substring(indexFirstVowel);
-			System.out.println(suffix);
 			
 			// Pig string construction
 			if (pigString.isEmpty()) {
@@ -496,31 +494,6 @@ public class EvaluationService {
 			indexFirstVowel = 0;
 		}
 		
-//		for (String i : parsedString) {
-//			System.out.println(i);
-//			// Fall through cases for vowels. Handle consonants in default 
-//			switch (i.charAt(0)) {
-//				case 'a':
-//				case 'e':
-//				case 'i':
-//				case 'o':
-//				case 'u':
-//					if (pigString.isEmpty()) {
-//						pigString = i + "ay";
-//						break;
-//					}
-//					pigString += " " + i + "ay";
-//					break;
-//				default:
-//					if (pigString.isEmpty()) {
-//						pigString = i.substring(1) + i.charAt(0) + "ay";
-//						break;
-//					}
-//					pigString = " " + i.substring(1) + i.charAt(0) + "ay";
-//					break;
-//			}
-//		}
-		System.out.println(pigString);
 		return pigString;
 	}
 
