@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -320,8 +321,8 @@ public class EvaluationService {
 		}
 		
 		// String[] to store parsed string
-		// parse on whitespace and punctuation
-		String[] stringArr = string.split("[\\p{Punct}\\s]");
+		// parse on whitespace and punctuation using regular expression
+		String[] stringArr = string.split("[\\p{Punct}\\s]+");
 		
 		// Map for storage
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -335,10 +336,10 @@ public class EvaluationService {
 				}
 			}
 		}
-		
 		return map;
 	}	
 
+	
 	/**
 	 * 7. Implement a binary search algorithm.
 	 * 
@@ -359,7 +360,7 @@ public class EvaluationService {
 	 * In each step, the algorithm compares the search key value with the key value
 	 * of the middle element of the array.
 	 * 
-	 * If the keys match, then a matching element has been found and its index, or
+	 * If the keys match, then a matching element hzas been found and its index, or
 	 * position, is returned.
 	 * 
 	 * Otherwise, if the search key is less than the middle element's key, then the
@@ -378,15 +379,45 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
+			// Get size and initialize middle
 			int size = sortedList.size();
+			System.out.println("size:" + size);
 			int it = size/2;
-			System.out.println(it);
+			System.out.println("it: " + it);
 			
-			T val = sortedList.get(it);
-			while (val != t) {
-				if (t < val){
-					it = it/2;
+			// Upper and lower bound of range
+			int upper = size;
+			int lower = 0;
+
+			// Convert to String
+			String val = sortedList.get(it).toString();
+			String lookFor = t.toString();
+			
+			// Convert to Integer
+			Integer iVal = Integer.parseInt(val); 
+			Integer iLookFor = Integer.parseInt(lookFor);
+			
+			
+			while (!iVal.equals(iLookFor)) {
+				// Update midpoint based on comparison of midpoint & desired value
+				if (iVal.compareTo(iLookFor) > 0){
+					System.out.println("looking in lower half");
+					// update upper
+					upper = it;
+					// new midpoint
+					it = (it + lower)/2;
 				}
+				else {
+					System.out.println("looking in upper half");
+					// update lower
+					lower = it;
+					// new midpoint
+					it = (upper + it)/2;
+				}
+				// Update val & iVal
+				val = sortedList.get(it).toString();
+				iVal = Integer.parseInt(val);
+				
 			}
 			return it;
 		}
@@ -403,7 +434,6 @@ public class EvaluationService {
 		public void setSortedList(List<T> sortedList) {
 			this.sortedList = sortedList;
 		}
-
 	}
 
 	/**
