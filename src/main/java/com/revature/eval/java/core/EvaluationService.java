@@ -4,8 +4,10 @@ import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class EvaluationService {
 
@@ -902,7 +904,31 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
+		// Empty string handler
+		if (string.isEmpty()) {
+			return false;
+		}
+		
+		// We can use a set for this since there cannot be duplicate values
+		// Push every letter and check if set size is 26 at the end
+		Set<String> letters = new HashSet<String>();
+		
+		// Convert to lowercase and parse string on whitespace and punctuation
+		String[] parsedString = string.toLowerCase().split("[\\s\\p{Punct}]+");
+		
+		// For each string
+		for (String i : parsedString) {
+			// Add each char
+			for (int j = 0; j < i.length(); j++) {
+				letters.add("" + i.charAt(j));
+			}
+		}
+
+		// Check size of letters = 26 
+		if (letters.size() == 26) {
+			return true;
+		}
+		
 		return false;
 	}
 
