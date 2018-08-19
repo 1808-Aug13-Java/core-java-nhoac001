@@ -557,7 +557,7 @@ public class EvaluationService {
 		// Local variables
 		Long input = new Long(l);
 		Long factor;
-		List<Long> primeFactors = new ArrayList();
+		List<Long> primeFactors = new ArrayList<Long>();
 		
 		// Starting at 2, test if modulo returns 0.
 		// Loops to prevent multiples of a number from remaining and pull all
@@ -768,7 +768,6 @@ public class EvaluationService {
 					}
 					// If wordBuffer reaches size limit, push to cipher and reset
 					if (wordBuffer.length() == 5) {
-						System.out.println("wordBuffer limit reached: " + wordBuffer);
 						cipher += wordBuffer + " ";
 						wordBuffer = "";
 					}
@@ -782,7 +781,6 @@ public class EvaluationService {
 				cipher = cipher.substring(0, cipher.length()-1);
 			}
 			
-			System.out.println("cipher: " + cipher);
 			return cipher;		
 		}
 
@@ -793,7 +791,34 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
+			// Handle empty string
+			if (string.isEmpty()) {
+				return "";
+			}
+						
+			// Reference variables
+			String alphabet = "abcdefghijklmnopqrstuvwxyz";
+			String reversed = "zyxwvutsrqponmlkjihgfedcba";
+			
+			// Local variables
+			String decoded = "";
+			int index;
+			char ch;
+			
+			// parse string delimiting on whitespace
+			// shouldn't need to handle invalid chars
+			// assume string is a result of encoding
+			String[] parsedString = string.split("[\\s]+");
+			
+			// Iterate through string array
+			for (String i : parsedString) {
+				// Iterate through each character
+				for (int j = 0; j < i.length();j++) {
+					ch = i.charAt(j);
+				}
+			}
+			
+			
 			return null;
 		}
 	}
