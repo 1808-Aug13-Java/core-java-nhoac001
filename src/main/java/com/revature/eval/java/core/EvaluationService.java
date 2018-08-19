@@ -663,12 +663,13 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// Invalid argument
+		// Invalid argument handler
 		if (i == 0) {
 			throw new IllegalArgumentException();
 		}
 		
 		// initialize primeList to store primes with 2 
+		// index starts at 1 to account for the initial 2
 		ArrayList<Integer> primeList = new ArrayList<Integer>();
 		primeList.add(2);
 		int index = 1;
@@ -676,21 +677,25 @@ public class EvaluationService {
 		boolean markedToAdd = true;
 		
 		while (index < i) {
-//		for (int j = 0; j < 5; j++) {
-//			System.out.println("Testing: " + testNum);
 			for (Integer prime : primeList) {
+				// iterate through list of known primes to see if current number
+				// being tested is a prime
 				if(testNum % prime == 0) {
 					markedToAdd = false;
 				}
 			}
+			// Add the number to primeList if number is prime
+			// update index  to reflect the addition
 			if (markedToAdd) {
 				primeList.add(testNum);
 				index++;
 			}
-			testNum++;
+			// Add 2 to testNum b/c we know 2 is the only even prime number
+			// This reduces runtime by about half
+			// reset makedToAdd flag to default value
+			testNum += 2;
 			markedToAdd = true;
 		}
-//		System.out.println(primeList.toString());
 		
 		return primeList.get(index - 1);
 	}
