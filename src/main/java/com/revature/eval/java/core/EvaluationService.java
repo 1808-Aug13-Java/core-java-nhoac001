@@ -733,8 +733,57 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+
+			// Handle empty string
+			if (string.isEmpty()) {
+				return "";
+			}
+			
+			// Reference variables
+			String alphabet = "abcdefghijklmnopqrstuvwxyz";
+			String reversed = "zyxwvutsrqponmlkjihgfedcba";
+			
+			// Storage variables
+			String wordBuffer = "";
+			String cipher = "";
+			char ch;
+			int index;
+			
+			// Convert string to lower and parse using whitespace & punctuation delimiter
+			String[] parsedString = string.toLowerCase().split("[\\s\\p{Punct}]+");
+			
+			// Iterate through parsed strings
+			for (String i : parsedString) {
+				// Iterate through each character
+				for (int j = 0; j < i.length(); j++) {
+					ch = i.charAt(j);
+					// If character is a letter, encode it and put in wordBuffer
+					// else, push character
+					if (Character.isLetter(ch)) {
+						index = alphabet.indexOf(ch);
+						wordBuffer += reversed.charAt(index);
+
+					} else {
+						wordBuffer += ch;
+					}
+					// If wordBuffer reaches size limit, push to cipher and reset
+					if (wordBuffer.length() == 5) {
+						System.out.println("wordBuffer limit reached: " + wordBuffer);
+						cipher += wordBuffer + " ";
+						wordBuffer = "";
+					}
+				}
+			}
+			// Check if wordBuffer has something to be pushed
+			// if so, push it, else get rid of extra whitespace
+			if (!wordBuffer.isEmpty()) {
+				cipher += wordBuffer;
+			} else {
+				cipher = cipher.substring(0, cipher.length()-1);
+			}
+			
+			System.out.println("cipher: " + cipher);
+			return cipher;		
 		}
 
 		/**
