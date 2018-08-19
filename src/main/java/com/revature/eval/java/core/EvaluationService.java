@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -977,8 +978,27 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		// Variables for storage
+		// Use set b/c no duplicate values
+		Set<Integer> multiples = new HashSet<Integer>();
+		int sum = 0;
+		
+		// Locate multiples less than i
+		for (int j = 0; j < i; j++) {
+			// Test j against each number, in set parameter
+			for (int k = 0; k < set.length; k++) {
+				if ((j % set[k]) == 0) {
+					multiples.add(j);
+				}
+			}
+		}
+		
+		// Sum of all values in multiples set
+		for (Integer multiple : multiples) {
+			sum += multiple;
+		}
+		
+		return sum;
 	}
 
 	/**
