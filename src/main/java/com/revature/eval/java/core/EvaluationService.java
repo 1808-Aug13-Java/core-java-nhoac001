@@ -813,13 +813,20 @@ public class EvaluationService {
 			// Iterate through string array
 			for (String i : parsedString) {
 				// Iterate through each character
+				// Decode and push decoded character
 				for (int j = 0; j < i.length();j++) {
 					ch = i.charAt(j);
+					// Check if ch is alphabetical
+					// else, push ch
+					if (Character.isLetter(ch)) {
+						index = reversed.indexOf(ch);
+						decoded += alphabet.charAt(index);
+					} else {
+						decoded += ch;
+					}
 				}
 			}
-			
-			
-			return null;
+			return decoded;
 		}
 	}
 
