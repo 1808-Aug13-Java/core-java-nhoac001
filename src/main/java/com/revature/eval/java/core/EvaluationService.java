@@ -617,8 +617,39 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			// We can use character arithmetic to implement this
+			
+			// Vars for storage
+			String cipher = "";
+			char c;
+			int offset = 'z' - 'a' + 1;
+			
+			// Cipher loop
+			for (int i = 0; i < string.length(); i++) {
+				// get character
+				c = string.charAt(i);
+				
+				// only apply rotation to alphabetical characters
+				if (Character.isLetter(c)) {
+					c = (char) (c + key);
+					
+					// Check for wrap-around
+					// Different check between upper and lower case
+					// offset is the same regardless of case
+					if (Character.isLowerCase(string.charAt(i))) {
+						if (c > 'z') {
+							c -= offset;
+						}
+					} else {
+						if (c > 'Z') {
+							c -= offset;
+						}
+					}
+				}
+				// Add character to cipher string
+				cipher += c;
+			}
+			return cipher;
 		}
 
 	}
