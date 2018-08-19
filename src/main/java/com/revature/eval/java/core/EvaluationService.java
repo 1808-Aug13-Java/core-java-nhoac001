@@ -382,9 +382,7 @@ public class EvaluationService {
 		public int indexOf(T t) {
 			// Get size and initialize middle
 			int size = sortedList.size();
-			System.out.println("size:" + size);
 			int it = size/2;
-			System.out.println("it: " + it);
 			
 			// Upper and lower bound of range
 			int upper = size;
@@ -402,14 +400,12 @@ public class EvaluationService {
 			while (!iVal.equals(iLookFor)) {
 				// Update midpoint based on comparison of midpoint & desired value
 				if (iVal.compareTo(iLookFor) > 0){
-					System.out.println("looking in lower half");
 					// update upper
 					upper = it;
 					// new midpoint
 					it = (it + lower)/2;
 				}
 				else {
-					System.out.println("looking in upper half");
 					// update lower
 					lower = it;
 					// new midpoint
@@ -667,7 +663,9 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
+		ArrayList<Integer> primeList = new ArrayList<Integer>();
+		
+		
 		return 0;
 	}
 
