@@ -572,7 +572,6 @@ public class EvaluationService {
 				primeFactors.add(factor);
 				input /= factor;
 			}
-			
 		}
 		
 		// If list is empty, initial input was prime
@@ -583,11 +582,6 @@ public class EvaluationService {
 		return primeFactors;
 	}
 	
-	public Long primeHelper(Long l) {
-		
-		return l;
-	}
-
 	/**
 	 * 11. Create an implementation of the rotational cipher, also sometimes called
 	 * the Caesar cipher.
