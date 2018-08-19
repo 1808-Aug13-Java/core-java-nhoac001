@@ -663,10 +663,36 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
+		// Invalid argument
+		if (i == 0) {
+			throw new IllegalArgumentException();
+		}
+		
+		// initialize primeList to store primes with 2 
 		ArrayList<Integer> primeList = new ArrayList<Integer>();
+		primeList.add(2);
+		int index = 1;
+		int testNum = 3;
+		boolean markedToAdd = true;
 		
+		while (index < i) {
+//		for (int j = 0; j < 5; j++) {
+//			System.out.println("Testing: " + testNum);
+			for (Integer prime : primeList) {
+				if(testNum % prime == 0) {
+					markedToAdd = false;
+				}
+			}
+			if (markedToAdd) {
+				primeList.add(testNum);
+				index++;
+			}
+			testNum++;
+			markedToAdd = true;
+		}
+//		System.out.println(primeList.toString());
 		
-		return 0;
+		return primeList.get(index - 1);
 	}
 
 	/**
