@@ -853,7 +853,38 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
+		// parse string on '-'
+		String[] parsedString = string.split("[-]");
+		
+		// Vars for storage
+		int input;
+		char ch;
+		int factor = 10;
+		int sum = 0;
+		
+		// Iterate through parsedString
+		for (String i : parsedString) {
+			// Iterate through each character
+			for (int j = 0; j < i.length(); j++) {
+				ch = i.charAt(j);
+				// Check if numerical
+				if (Character.isDigit(ch)) {
+					input = Integer.valueOf("" + ch);
+				} else if (ch == 'X') { //Check if 'X'
+					input = 10;
+				} else { // Invalid input, return false immediately
+					return false;
+				}
+				// Multiply input by factor, decrement factor, and add to cumulative sum
+				sum += input * factor;
+				factor--;
+			}
+		}
+		
+		// Check if sum % 11 == 0
+		if ((sum % 11) == 0) {
+			return true;
+		}
 		return false;
 	}
 
