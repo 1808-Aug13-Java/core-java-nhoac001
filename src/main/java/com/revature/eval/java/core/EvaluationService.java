@@ -1038,7 +1038,53 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
+		// parse string and remove whitespace
+		String[] parsedStringArr = string.split("[\\s]+");
+		String parsedString = "";
+		for (String i : parsedStringArr) {
+			parsedString += i;
+		}
+		// Check if parsed string is length <= 1
+		if (parsedString.length() <=1 ) {
+			return false;
+		}
+		// Variables for storage
+		boolean toBeDoubled;
+		int sum = 0;
+		char ch;
+		
+		// set toBeDoubled flag based on whether length is odd or even
+		if ((parsedString.length() % 2) == 1) {
+			toBeDoubled = false;
+		} else {
+			toBeDoubled = true;
+		}
+		
+		// Iterate through parsedString
+		for (int i = 0; i < parsedString.length(); i++) {
+			ch = parsedString.charAt(i);
+			// Check if char is valid
+			if (!Character.isDigit(ch)) {
+				return false;
+			}
+			// Check if value should be doubled
+			if (toBeDoubled) {
+				sum += Integer.parseInt("" + ch) * 2;
+				// Check if doubled value > 9
+				if ((Integer.parseInt("" + ch) * 2) > 9) {
+					sum -= 9;
+				}
+				toBeDoubled = false;
+			} else {
+				sum += Integer.parseInt("" + ch);
+				toBeDoubled = true;
+			}
+		}
+		// Test if sum is divisible by 10
+		if ((sum % 10) == 0) {
+			return true;
+		}
+		
 		return false;
 	}
 
@@ -1070,7 +1116,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
+		String[] parsedStringArrr = string.split("[\\s]");
 		return 0;
 	}
 
