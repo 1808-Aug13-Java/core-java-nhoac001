@@ -1116,8 +1116,53 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		String[] parsedStringArrr = string.split("[\\s]");
-		return 0;
+		// Remove whitespace and '?'
+		String[] parsedStringArrr = string.split("[\\s?]+");
+		// Check if input is of valid length 6 or 5
+		if ((parsedStringArrr.length < 5) || (parsedStringArrr.length > 6)) {
+			return 0;
+		}
+		
+		int result = 0;
+		String operation = "";
+		List<Integer> operands = new ArrayList<Integer>();
+		
+		for (String i : parsedStringArrr) {
+			// Extract relevant information
+			switch (i) {
+				case "What":
+				case "is":
+				case "by":
+					break;
+				case "plus":
+				case "minus":
+				case "multiplied":
+				case "divided":
+					operation = i;
+					break;
+				default:
+					operands.add(Integer.parseInt(i));
+					break;
+			}	
+		}
+		// perform operation
+		switch (operation) {
+			case "plus":
+				result = operands.get(0) + operands.get(1);
+				break;
+			case "minus":
+				result = operands.get(0) - operands.get(1);
+				break;
+			case "multiplied":
+				result = operands.get(0) * operands.get(1);
+				break;
+			case "divided":
+				result = operands.get(0) / operands.get(1);
+			default:
+				break;
+		}
+		
+		return result;
 	}
 
 }
